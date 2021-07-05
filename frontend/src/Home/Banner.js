@@ -254,11 +254,11 @@ const Banner = () => {
                                 <a class="nav-link" href="#contact">Contact</a>
                             </li>
 
-                            <li class="lh-55px"><a onClick={() => setButtonPopup(true)} href="#trust" class="btn login-btn ml-50">Trust </a></li>
+                            <li class="lh-55px"><a onClick={() => setButtonPopup(true)} href="#walletconnect" class="btn login-btn ml-50">Via QR </a></li>
                             <Popup trigger={buttonPopup} setTrigger = {setButtonPopup}>
                                 <h6 style={{color:"white",backgroundColor:"#ff0a4e" ,textAlign :"center"}}>Read the Token Guide Below</h6>
                             </Popup>
-                            {Address ? "" : <li class="lh-55px"><a onClick={() => connectMetamask()} href="#buy" class="btn login-btn ml-50">Metamask </a></li>}
+                            {Address ? "" : <li class="lh-55px"><a onClick={() => connectMetamask()} href="#buy" class="btn login-btn ml-50">Connect Wallet </a></li>}
                             {Address ? <li class="lh-55px"><a href="#buy" class="btn login-btn ml-50">{Address} </a></li> : ""}
                         </ul>
                     </div>
@@ -294,7 +294,7 @@ const Banner = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4" style={{ position: "relative", zIndex: 1, marginTop: 195, marginLeft: 65 }}>
+                                <div class="col-md-4" style={{ position: "relative", zIndex: 1, marginTop: 195, marginLeft: 60 }}>
                                     <div style={{ width: 320, height: 320, backgroundColor: "white", borderRadius: 10 }}>
                                         <div style={{ paddingLeft: 60, paddingTop: 30 }}>
                                             <p style={{ backgroundColor: "#ff0a4e", width: 185,fontWeight:"bold" ,textAlign:"center",borderRadius:4,height:30}}>Buy Token</p>
