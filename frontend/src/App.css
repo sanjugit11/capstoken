@@ -1,0 +1,11 @@
+.buy{
+background-color: blue;
+width: 120px;
+color: white;
+}
+
+.buy:hover {
+background-color: green;
+color:white;
+}
+

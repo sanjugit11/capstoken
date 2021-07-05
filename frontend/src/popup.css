@@ -1,0 +1,40 @@
+.popup{
+    position: fixed;
+    top:60px;
+    left:813px;
+    width:19%;
+    height:220px;
+    background-color: white;
+    display: flex;
+    text-align: left;
+    z-index: 1;
+}
+
+.popup-inner{
+    position: relative;
+    padding: 1px;
+    width: 100%;
+    max-width: 640px;
+    /* background-color: white; */
+}
+
+.popup-inner .close-btn{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+.close-btn{
+    background-color: red;
+    width:30px;
+    height:30px;
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    background-repeat: repeat;
+    cursor: pointer;
+}
+.close-btn:hover{
+    color: white;
+   
+}
