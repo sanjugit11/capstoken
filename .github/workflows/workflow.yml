@@ -36,7 +36,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: AhhoInVB4aLlJ+BFfOIp6objvyLn8lqclQ5McIeF
           AWS_REGION: ap-south-1
           AWS_BUCKET_NAME: wallet-capstoneproject
-          SOURCE: /build
+          SOURCE: build
           TARGET: /
 #       # Runs a set of commands using the runners shell
 #       - name: Run a multi-line script
