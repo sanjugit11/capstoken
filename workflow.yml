@@ -1,0 +1,22 @@
+name: upgrade-web
+on [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Sync to S3
+        uses: raulanatol/aws-s3-docker-action@master
+        env:
+          AWS_ACCESS_KEY_ID: AKIAQZOZMYLC4TTHAFO4
+          AWS_SECRET_ACCESS_KEY: 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
+          AWS_REGION: ap-south-1
+          AWS_BUCKET_NAME: wallet-capstoneproject
+          SOURCE: /build
+          TARGET: /
+#           WITH_DELETE: 
+#           WITH_CLOUD_FRONT_INVALIDATION: 
+#           AWS_CLOUDFRONT_DISTRIBUTION_ID: 
+#           AWS_CLOUDFRONT_INVALIDATION_PATH:
