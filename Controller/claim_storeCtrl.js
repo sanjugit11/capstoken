@@ -75,7 +75,7 @@ const claimFactoryCtrl = {
 			//  const x = amount *  * 100
 
 			
-			const token_address = "0xCd20B210A395252F37fcb312F31eCde86F11c1ee";
+			const token_address = "0xBb380385088497FFDa63468c0764Cb923E467532";
 			const claimDetail = await claimFactory.find({
 				claim_status: "0",
 			});
