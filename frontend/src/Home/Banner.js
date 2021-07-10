@@ -317,7 +317,7 @@ const Banner = () => {
                                       <h5 style={{color:"white",marginLeft:40,}}>Trust Wallet & Metamask</h5>
                                       <div style={{lineHeight: 1.6 ,color:"white"}}>* Scan & Pay from Trust & Metamask Button <br></br>
                                           *Wait for 60 seconds & Refresh the browser<br></br>
-                                          * Add token with this Address.<br></br>0xCd20B210A395252F37fcb312F31eCde86F11c1ee
+                                          * Add token with this Address.<br></br>0xBb380385088497FFDa63468c0764Cb923E467532
                                            </div>
                                     
                                 </div>
