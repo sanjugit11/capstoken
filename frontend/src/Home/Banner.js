@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Web3 from 'web3';
 import Binance from 'binance-api-node';
 import { getDataAPI, getTransactionAPI } from "../utils";
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+// import Web3Modal from "web3modal";
+// import WalletConnectProvider from "@walletconnect/web3-provider";
 //  import logo1 from './logoqr/frame.png';
 import Popup from './Popup';
 
@@ -30,79 +30,29 @@ const Banner = () => {
     const x = amount * chanAmount * 100
     const y = amount * chanAmount;
 
-  
-//    const Web3Modal = window.Web3Modal.default;
+
     const connectMetamask = async () => {
-    
-		try {
+        const chainid = await web31.eth.getChainId();
+        if (chainid == "97") {
+            try {
+                await window.ethereum.enable();
+                const accounts = await web31.eth.getAccounts();
+                const address = accounts[0];
+                // console.log(web31.eth.getChainId, "this is your chainn id")
+                setAddress(
+                    address.slice(0, address.length / 9) +
+                    "..." +
+                    address.slice(38, address.length / 1),
+                );
+                setTransactionAddress(address)
 
-
-            const providerOptions = {
-                  walletconnect: {
-                    package: WalletConnectProvider,
-                    options: {
-                      rpc: {
-                          97: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
-                        //  56: 'https://bsc-dataseed.binance.org/'
-                      },
-                      network: 'binance',
-                    }
-                  }
-                };
-    
-        //     // //64da38d1dbf44007aa9e385511ee6f4f
-    
-            const web3Modal = new Web3Modal({
-                       cacheProvider: true, // optional
-                      providerOptions // required
-                    });
-            
-                const provider = await web3Modal.connect();
-                const web3 = new Web3(provider);
-                const chainid = await web3.eth.getChainId();
-                if (chainid == "97") {
-                    const accounts = await web3.eth.getAccounts();
-                    const address = accounts[0];
-                    setAddress(
-                        address.slice(0, address.length / 9) +
-                            "..." +
-                            address.slice(38, address.length / 1),
-                    );
-                    setTransactionAddress(address)
-                } else {
-                    await web3Modal.clearCachedProvider();
-                    alert("Please switch to Binance TestNet");
-                     window.location.reload();
-                }
-                await web3Modal.clearCachedProvider();
-            } catch (e) {
-                console.error(e);
+            } catch (error) {
+                console.error(error);
             }
+        } else {
+            alert("Connect to Binance Mainnet OR MetaMask extension is not detected!");
         }
-
-
-    // const connectMetamask = async () => {
-    //     const chainid = await web31.eth.getChainId();
-    //     if (chainid == "56") {
-    //         try {
-    //             await window.ethereum.enable();
-    //             const accounts = await web31.eth.getAccounts();
-    //             const address = accounts[0];
-    //             console.log(web31.eth.getChainId, "this is your chainn id")
-    //             setAddress(
-    //                 address.slice(0, address.length / 9) +
-    //                 "..." +
-    //                 address.slice(38, address.length / 1),
-    //             );
-    //             setTransactionAddress(address)
-
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     } else {
-    //         alert("Connect to Binance Mainnet OR MetaMask extension is not detected!");
-    //     }
-    // }
+    }
 
 
     useEffect(() => {
@@ -114,85 +64,33 @@ const Banner = () => {
     }, [])
 
     const prepare =  () => {
-        getDataAPI("claim_store").then((res)=> alert(res.data.msg));
+        getDataAPI("claim_store");
     }
     const Deliver = () => {
-        getTransactionAPI("claim_token_distribute").then((res) => alert(res.data.msg));
+        getTransactionAPI("claim_token_distribute");
     }
+
+    setInterval(() =>{
+
+    })
   
     const transactionMetamask = async () => {
         if (transactionAddress) {
-        //     try {
-        //         const providerOptions = {
-        //             // display: {
-        //             //     logo: "./frame.png"
-        //             //   },
-        //             walletconnect: {
-        //                 package: WalletConnectProvider,
-        //                 options: {
-        //                     rpc: {
-        //                         56: 'https://bsc-dataseed.binance.org/'
-        //                     },
-        //                     network: 'binance',
-        //                 }
-        //             }
-        //         };
-
-        //         const web3Modal = new Web3Modal({
-        //             cacheProvider: true, // optional
-        //             providerOptions // required
-        //         });
-
-        //         const provider = await web3Modal.connect();
-        //         //const web3 = new Web3(provider);
-        //         const web31 = new Web3(provider);
-        //         const chainid = await web31.eth.getChainId();
-
-        //         if (chainid == "56") {
-        //             // const address = await web31.eth.getAccounts();
-        //             await web31.eth.sendTransaction({
-        //                 to: '0xDea4F98827B6BdbFa6fC8cB2B6989c9571dbe5b5',
-        //                 from: transactionAddress,
-        //                 value: amount * 10 ** 18,
-        //             });
-        //             setTimeout(() => {
-        //                 prepare();
-        //                 // window.location.reload();
-        //             }, 25000);
-                    
-        //             setTimeout(() => {
-        //                 Deliver();
-        //                 window.location.reload();
-        //             }, 25000);
-
-        //         } else {
-        //             await web3Modal.clearCachedProvider();
-        //             alert("Please switch to Binance Mainnet");
-        //             window.location.reload();
-        //         }
-
-
-
-
-        //     } catch (err) {
-        //         console.log(err);
-        //         return {
-        //             connectedStatus: false,
-        //             status: alert(
-        //                 "🦊 There is some problem in transaction or User denied transaction",
-        //             ),
-        //         };
-        //     }
 
             if (window.ethereum) {
                 try {
                     await window.ethereum.enable();
                     //const address = await web3.eth.getAccounts();
-                    web31.eth.sendTransaction({
+                    const res = await web31.eth.sendTransaction({
                         to: '0x0C9982e9cF6EB49f2376459BFEbCc210c45F3F13',
                         from: transactionAddress,
                         value: amount * 10 ** 18,
                     });
+                    console.log(res)
+                if(res.status == true){
+                    await prepare()
+                    await Deliver()
+                }
                 } catch (error) {
                     // console.log(error);
                     return {
@@ -200,20 +98,6 @@ const Banner = () => {
                         status: "🦊 there is some problem in transaction",
                     };
                 }
-                setTimeout(() => {
-                    prepare();
-                    // window.location.reload();
-                }, 25000);
-
-                setTimeout(() => {
-                    Deliver();
-                    window.location.reload();
-                }, 25000);
-                
-                setInterval(() =>{
-                    getTransactionAPI("claim_token_distribute").then((res) => alert(res.data.msg));
-                }, 4000);
-
             } else {
                 alert("Metamask extensions not detected!");
             }
@@ -229,7 +113,7 @@ const Banner = () => {
 
     setInterval(() => {
         setScreenWidth(window.innerWidth)
-        console.log(window.innerWidth,'....................')
+        // console.log(window.innerWidth,'....................')
     },1500)
     useEffect(() => { 
         if(screenWidth > 990){

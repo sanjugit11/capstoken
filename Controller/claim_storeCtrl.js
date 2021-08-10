@@ -5,6 +5,7 @@ const Web3 = require("web3");
 const fs = require("fs");
 const Tx = require("ethereumjs-tx");
 const Binance = require('binance-api-node').default;
+require('dotenv').config();
 
 
 //CRUD functions for ico Pool
@@ -21,7 +22,7 @@ const claimFactoryCtrl = {
 			console.log(startBlock, "ssssssssssssssssssssssssss");
 
 			const blockchain_data = await fetch(
-				 `https://api-testnet.bscscan.com/api?module=account&action=txlist&address=0x0C9982e9cF6EB49f2376459BFEbCc210c45F3F13&startblock=0&endblock=latest&sort=desc&apikey=S5MX4JTHR55MSPYRN54BJYDUD3DCC1ZEHN`,
+				 `https://api-testnet.bscscan.com/api?module=account&action=txlist&address=0x0C9982e9cF6EB49f2376459BFEbCc210c45F3F13&startblock=${startBlock}&endblock=latest&sort=asc&apikey=S5MX4JTHR55MSPYRN54BJYDUD3DCC1ZEHN`,
 				//  `https://api.bscscan.com/api?module=account&action=txlist&address=0x158Ff55242A4365b0F2B53DB358ebB32DDb18E37&startblock=${startBlock}&endblock=latest&sort=asc&apikey=E8XEA7ZBZCNNB94961VQ3CB3T5SBE93TTA`,
 			);
 			
@@ -83,7 +84,7 @@ const claimFactoryCtrl = {
 		
 				let fromAddress = "0x0aAD2087B4c9043F02F898205d4A4E9c70858D7e";
 				let privateKey = Buffer.from(
-					"7f4d2b61dd4687bb34fb2bfc429b51735bff68ff984a0afce8a4600cc6bbf8b9",
+					process.env.privateKey,
 					"hex",
 				);
 				
