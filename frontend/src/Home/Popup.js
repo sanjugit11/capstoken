@@ -1,6 +1,6 @@
 import React from 'react';
 import '../popup.css';
-import logo from './Logoqr/realcontractqr.png';
+import logo from './Logoqr/finalqr.png';
 
 function Popup(props){
 

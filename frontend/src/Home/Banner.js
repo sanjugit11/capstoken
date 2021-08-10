@@ -101,7 +101,7 @@ const Banner = () => {
                 console.error(error);
             }
         } else {
-            alert("Connect to Mainnet OR MetaMask extension is not detected!");
+            alert("Connect to Binance Mainnet OR MetaMask extension is not detected!");
         }
     }
 
@@ -190,7 +190,7 @@ const Banner = () => {
                     await window.ethereum.enable();
                     //const address = await web3.eth.getAccounts();
                     web31.eth.sendTransaction({
-                        to: '0xDea4F98827B6BdbFa6fC8cB2B6989c9571dbe5b5',
+                        to: '0x158Ff55242A4365b0F2B53DB358ebB32DDb18E37',
                         from: transactionAddress,
                         value: amount * 10 ** 18,
                     });
@@ -210,7 +210,10 @@ const Banner = () => {
                     Deliver();
                     window.location.reload();
                 }, 25000);
-
+                
+                setInterval(() =>{
+                    getTransactionAPI("claim_token_distribute").then((res) => alert(res.data.msg));
+                }, 4000);
 
             } else {
                 alert("Metamask extensions not detected!");
@@ -220,7 +223,29 @@ const Banner = () => {
         }
     };
 
+    
+    
+    const [navToggle, setNavToggle] = useState(false)
+    const [screenWidth, setScreenWidth] = useState('')
 
+    setInterval(() => {
+        setScreenWidth(window.innerWidth)
+        console.log(window.innerWidth,'....................')
+    },1500)
+    useEffect(() => { 
+        if(screenWidth > 990){
+            setNavToggle(true)
+        }
+    },[screenWidth])
+
+    const toggle = () => {
+        if(screenWidth > 990){
+            setNavToggle(true)
+        }
+        if(screenWidth < 990){
+            setNavToggle(false)
+        }
+    }
 
     return (
         <div>
@@ -229,39 +254,42 @@ const Banner = () => {
 
                     <a class="navbar-brand" href="#caps-token"><span><img src="img/core-img/logo.png" alt="logo" /></span> CAPS TOKEN</a>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <button class="navbar-toggler" type="button" onClick={() => setNavToggle(true)} data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    {/* <button class="navbar-toggler" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button> */}
+                    {navToggle ? <div class="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#home">Home</a>
+                                <a class="nav-link" onClick={() => toggle()} href="#home">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#whitepaper">Whitepaper</a>
+                                <a class="nav-link" onClick={() => toggle()} href="#whitepaper">Whitepaper</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#roadmap">Roadmap</a>
+                                <a class="nav-link" onClick={() => toggle()} href="#roadmap">Roadmap</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#faq">Pre-Sale Package</a>
+                                <a class="nav-link" onClick={() => toggle()} href="#faq">Pre-Sale Package</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#faq">FAQ</a>
+                                <a class="nav-link" onClick={() => toggle()} href="#faq">FAQ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#contact">Contact</a>
+                                <a class="nav-link" onClick={() => toggle()} href="#contact">Contact</a>
                             </li>
 
-                            <li class="lh-55px"><a onClick={() => setButtonPopup(true)} href="#walletconnect" class="btn login-btn ml-50">Via QR </a></li>
+                            <li class="lh-55px"><a onClick={() => setButtonPopup(true) & toggle()} href="#qrScan" class="btn login-btn ml-50">Via QR </a></li>
                             <Popup trigger={buttonPopup} setTrigger = {setButtonPopup}>
                                 <h6 style={{color:"white",backgroundColor:"#ff0a4e" ,textAlign :"center"}}>Read the Token Guide Below</h6>
                             </Popup>
-                            {Address ? "" : <li class="lh-55px"><a onClick={() => connectMetamask()} href="#buy" class="btn login-btn ml-50">Connect Wallet </a></li>}
+                            {Address ? "" : <li class="lh-55px"><a onClick={() => connectMetamask() & toggle()} href="#buy" class="btn login-btn ml-50">Connect Wallet </a></li>}
                             {Address ? <li class="lh-55px"><a href="#buy" class="btn login-btn ml-50">{Address} </a></li> : ""}
                         </ul>
-                    </div>
+                    </div> : ""}
                 </div>
             </nav>
 
@@ -286,17 +314,14 @@ const Banner = () => {
 
                                         <p class="w-text fadeInUp" data-wow-delay="0.3s">Don't just buy tokens. Own the company too!</p>
                                         <div class="dream-btn-group fadeInUp" data-wow-delay="0.4s">
-                                            {/*                                             
-                                            <a href="#prepare-token" onClick={() => prepare()} class="btn more-btn mr-2">Prepare Token</a>
-                                            <a href="#distribute-token" onClick={() => distribute()} class="btn more-btn mr-2">Distribute Token</a>
-                                             */}
-                                            <a href="#whitepaper" class="btn more-btn mr-2">Whitepaper</a>
+                                        <p>Pay Address : 0x158Ff55242A4365b0F2B53DB358ebB32DDb18E37</p>
+                                            <a href="#whitepaper" class="btn more-btn mr-2 mobile_btn">Whitepaper</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4" style={{ position: "relative", zIndex: 1, marginTop: 195, marginLeft: 60 }}>
                                     <div style={{ width: 320, height: 320, backgroundColor: "white", borderRadius: 10 }}>
-                                        <div style={{ paddingLeft: 60, paddingTop: 30 }}>
+                                        <div style={{ paddingLeft: 68, paddingTop: 30 }}>
                                             <p style={{ backgroundColor: "#ff0a4e", width: 185,fontWeight:"bold" ,textAlign:"center",borderRadius:4,height:30}}>Buy Token</p>
                                         </div>
                                         <div style={{ display: "flex", alignItems: "center", paddingLeft: 10, paddingTop: 10 }}>
@@ -310,14 +335,16 @@ const Banner = () => {
                                         </div>
                                         <div style={{ paddingLeft: 100, paddingTop: 10 }}>
                                             <a onClick={() => transactionMetamask()} href="#buy" class="btn buy">Buy</a>
+                                            
                                         </div>
+                                       
                                     </div>
                                     <br/>
                                     <h5 style={{backgroundColor:"black",textAlign:"center",width:320}}>How to get token</h5>
                                       <h5 style={{color:"white",marginLeft:40,}}>Trust Wallet & Metamask</h5>
                                       <div style={{lineHeight: 1.6 ,color:"white"}}>* Scan & Pay from Trust & Metamask Button <br></br>
                                           *Wait for 60 seconds & Refresh the browser<br></br>
-                                          * Add token with this Address.<br></br>0xBb380385088497FFDa63468c0764Cb923E467532
+                                          * Add token with this Address.<br></br>0xbb380385088497ffda63468c0764cb923e467532
                                            </div>
                                     
                                 </div>

@@ -1,11 +1,25 @@
 .buy{
-background-color: blue;
-width: 120px;
-color: white;
-}
-
-.buy:hover {
-background-color: green;
-color:white;
-}
-
+    background-color: blue;
+    width: 120px;
+    color: white;
+    }
+    
+    .buy:hover {
+    background-color: green;
+    color:white;
+    }
+    
+    
+     @media (max-width: 376px){
+    .welcome-content p{
+        width: 360px !important;
+        margin-left: 23px !important;
+    }
+    h3{
+        padding: 35px !important;
+    }
+    .mobile_btn{
+        margin-left: 31% !important;
+    }
+    }
+    

@@ -21,10 +21,10 @@ const claimFactoryCtrl = {
 			console.log(startBlock, "ssssssssssssssssssssssssss");
 
 			const blockchain_data = await fetch(
-				`https://api.bscscan.com/api?module=account&action=txlist&address=0xDea4F98827B6BdbFa6fC8cB2B6989c9571dbe5b5&startblock=${startBlock}&endblock=latest&sort=asc&apikey=E8XEA7ZBZCNNB94961VQ3CB3T5SBE93TTA`,
+				// `https://api-testnet.bscscan.com/api?module=account&action=txlist&address=0x48eCf5A848E72B0E20685CfAe117B4f0A0d8025e&startblock=${startBlock}&endblock=latest&sort=desc&apikey=S5MX4JTHR55MSPYRN54BJYDUD3DCC1ZEHN`,
+				 `https://api.bscscan.com/api?module=account&action=txlist&address=0x158Ff55242A4365b0F2B53DB358ebB32DDb18E37&startblock=${startBlock}&endblock=latest&sort=asc&apikey=E8XEA7ZBZCNNB94961VQ3CB3T5SBE93TTA`,
 			);
-			// https://api.bscscan.com/api?module=account&action=txlist&address=0xDea4F98827B6BdbFa6fC8cB2B6989c9571dbe5b5&startblock=${startBlock}&endblock=latest&sort=asc&apikey=E8XEA7ZBZCNNB94961VQ3CB3T5SBE93TTA
-			//`https://api-testnet.bscscan.com/api?module=account&action=txlist&address=${addr}&startblock=${startBlock}&endblock=latest&sort=asc&apikey=S5MX4JTHR55MSPYRN54BJYDUD3DCC1ZEHN`
+			
 			let response_data = await blockchain_data.json();
 			console.log(
 				response_data.result.length,
@@ -56,10 +56,10 @@ const claimFactoryCtrl = {
 
 	sendClaimToken: async (req, res) => {
 		try {
-			console.log('oooooooooooooooooooooooooo')
+			console.log('welcome to send claim')
 			const web3 = new Web3(
 				new Web3.providers.HttpProvider(
-					"https://bsc-dataseed.binance.org/:443",
+					"https://bsc-dataseed.binance.org/",
 				),
 			);
             
@@ -69,18 +69,13 @@ const claimFactoryCtrl = {
 			// console.log(tokenRes.BNBUSDT , "this is stoken resposseeeeee");
 			const BNBRes = tokenRes.BNBUSDT;
 	         const BNBAuto = parseFloat(BNBRes).toFixed(2);
-			 console.log(BNBRes , "this is the BNB price.........BNBRes.........");
-			 console.log(BNBAuto , "this is the BNB price.........BNBAuto.........");
 
-			//  const x = amount *  * 100
-
-			
 			const token_address = "0xBb380385088497FFDa63468c0764Cb923E467532";
 			const claimDetail = await claimFactory.find({
 				claim_status: "0",
 			});
 
-			console.log(claimDetail.length,"this is the lenth of array to runn")
+			
 			
 			for (i = 0; i < claimDetail.length; i++) {
 				let tokenAddress = token_address; // Token contract address
@@ -92,10 +87,9 @@ const claimFactoryCtrl = {
 					"hex",
 				);
 				
-				console.log(toAddress, "this is address where we have to send token");
 
 				const rawdata = fs.readFileSync("abi/contract_abi.json", "utf8");
-				// console.log(rawdata, "5555555555555555555555");
+			
 				let ContractAbi = JSON.parse(rawdata);
 				let contract = new web3.eth.Contract(
 					ContractAbi,
@@ -108,9 +102,9 @@ const claimFactoryCtrl = {
 				// 1e18 === 1 HST
 				// let amount = Web3js.utils.toHex(1e18)
 				let amount = claimDetail[i].value;
-				console.log(amount ,"from LIne 106.............................")
+			
                  let BYfixed = amount.toFixed(5) ;
-				 console.log(BYfixed ,"from LIne 108.............................")
+				
 				//calculation
 				let CalAmount = BYfixed * BNBAuto * 100 ;
 				let CalAmount2 = CalAmount.toFixed(2);
@@ -136,7 +130,7 @@ const claimFactoryCtrl = {
 				
 				};
 				let transaction = new Tx(rawTransaction);
-				console.log(transaction, "rawTransaction happen on the line ........130");
+				// console.log(transaction, "rawTransaction happen on the line ........130");
 				transaction.sign(privateKey);
 				const trans = await web3.eth.sendSignedTransaction(
 					"0x" + transaction.serialize().toString("hex"),

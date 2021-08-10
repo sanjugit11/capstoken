@@ -14,7 +14,8 @@ app.use("/api", require("./Routes/claim_storeRoutes"));
 
 //db config
 const connection_url =
-	"mongodb+srv://seedify:kvnHQMHJxyfZEQeM@cluster0.fv8c7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+	// "mongodb+srv://seedify:kvnHQMHJxyfZEQeM@cluster0.fv8c7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+	"mongodb+srv://capstone:C8SFVviw1oj9pNep@cluster0.azwxv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(
 	connection_url,
 	{
