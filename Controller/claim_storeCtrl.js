@@ -21,8 +21,8 @@ const claimFactoryCtrl = {
 			console.log(startBlock, "ssssssssssssssssssssssssss");
 
 			const blockchain_data = await fetch(
-				// `https://api-testnet.bscscan.com/api?module=account&action=txlist&address=0x48eCf5A848E72B0E20685CfAe117B4f0A0d8025e&startblock=${startBlock}&endblock=latest&sort=desc&apikey=S5MX4JTHR55MSPYRN54BJYDUD3DCC1ZEHN`,
-				 `https://api.bscscan.com/api?module=account&action=txlist&address=0x158Ff55242A4365b0F2B53DB358ebB32DDb18E37&startblock=${startBlock}&endblock=latest&sort=asc&apikey=E8XEA7ZBZCNNB94961VQ3CB3T5SBE93TTA`,
+				 `https://api-testnet.bscscan.com/api?module=account&action=txlist&address=0x0C9982e9cF6EB49f2376459BFEbCc210c45F3F13&startblock=0&endblock=latest&sort=desc&apikey=S5MX4JTHR55MSPYRN54BJYDUD3DCC1ZEHN`,
+				//  `https://api.bscscan.com/api?module=account&action=txlist&address=0x158Ff55242A4365b0F2B53DB358ebB32DDb18E37&startblock=${startBlock}&endblock=latest&sort=asc&apikey=E8XEA7ZBZCNNB94961VQ3CB3T5SBE93TTA`,
 			);
 			
 			let response_data = await blockchain_data.json();
@@ -59,7 +59,7 @@ const claimFactoryCtrl = {
 			console.log('welcome to send claim')
 			const web3 = new Web3(
 				new Web3.providers.HttpProvider(
-					"https://bsc-dataseed.binance.org/",
+					"https://data-seed-prebsc-1-s1.binance.org:8545/",
 				),
 			);
             
@@ -70,7 +70,7 @@ const claimFactoryCtrl = {
 			const BNBRes = tokenRes.BNBUSDT;
 	         const BNBAuto = parseFloat(BNBRes).toFixed(2);
 
-			const token_address = "0xBb380385088497FFDa63468c0764Cb923E467532";
+			const token_address = "0xF1245Ca63fa8B797cd22a798942724751ad5F6BF";
 			const claimDetail = await claimFactory.find({
 				claim_status: "0",
 			});
@@ -81,9 +81,9 @@ const claimFactoryCtrl = {
 				let tokenAddress = token_address; // Token contract address
 				let toAddress = claimDetail[i].from_address; // User address
 		
-				let fromAddress = "0x27739aa2Bed45436A7EdF494E6e50d17680bCd8e";
+				let fromAddress = "0x0aAD2087B4c9043F02F898205d4A4E9c70858D7e";
 				let privateKey = Buffer.from(
-					"3ef9645b66d9117200f58770a9942cfe90d1dabad7ad8d83314dedf248688d22",
+					"7f4d2b61dd4687bb34fb2bfc429b51735bff68ff984a0afce8a4600cc6bbf8b9",
 					"hex",
 				);
 				
